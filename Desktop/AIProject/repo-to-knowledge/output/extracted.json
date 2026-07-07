@@ -1,0 +1,1452 @@
+[
+  {
+    "path": "main.py",
+    "module_docstring": null,
+    "imports": [
+      "fastapi",
+      "starlette.exceptions",
+      "starlette.middleware.cors",
+      "starlette.status",
+      "api.api_v1.api",
+      "core.config",
+      "core.errors",
+      "db.mongodb_utils"
+    ],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "path": "api\\api_v1\\api.py",
+    "module_docstring": null,
+    "imports": [
+      "fastapi",
+      "endpoints.article",
+      "endpoints.authenticaion",
+      "endpoints.comment",
+      "endpoints.profile",
+      "endpoints.tag",
+      "endpoints.user"
+    ],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "path": "api\\api_v1\\endpoints\\article.py",
+    "module_docstring": null,
+    "imports": [
+      "typing",
+      "fastapi",
+      "slugify",
+      "starlette.exceptions",
+      "starlette.status",
+      "core.jwt",
+      "core.utils",
+      "crud.article",
+      "crud.shortcuts",
+      "db.mongodb",
+      "models.article",
+      "models.user"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "get_articles",
+        "is_async": true,
+        "args": [
+          "tag",
+          "author",
+          "favorited",
+          "limit",
+          "offset",
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.get"
+        ],
+        "route_paths": [
+          "/articles"
+        ]
+      },
+      {
+        "name": "articles_feed",
+        "is_async": true,
+        "args": [
+          "limit",
+          "offset",
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.get"
+        ],
+        "route_paths": [
+          "/articles/feed"
+        ]
+      },
+      {
+        "name": "get_article",
+        "is_async": true,
+        "args": [
+          "slug",
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.get"
+        ],
+        "route_paths": [
+          "/articles/{slug}"
+        ]
+      },
+      {
+        "name": "create_new_article",
+        "is_async": true,
+        "args": [
+          "article",
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.post"
+        ],
+        "route_paths": [
+          "/articles"
+        ]
+      },
+      {
+        "name": "update_article",
+        "is_async": true,
+        "args": [
+          "slug",
+          "article",
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.put"
+        ],
+        "route_paths": [
+          "/articles/{slug}"
+        ]
+      },
+      {
+        "name": "delete_article",
+        "is_async": true,
+        "args": [
+          "slug",
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.delete"
+        ],
+        "route_paths": [
+          "/articles/{slug}"
+        ]
+      },
+      {
+        "name": "favorite_article",
+        "is_async": true,
+        "args": [
+          "slug",
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.post"
+        ],
+        "route_paths": [
+          "/articles/{slug}/favorite"
+        ]
+      },
+      {
+        "name": "delete_article_from_favorites",
+        "is_async": true,
+        "args": [
+          "slug",
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.delete"
+        ],
+        "route_paths": [
+          "/articles/{slug}/favorite"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "api\\api_v1\\endpoints\\authenticaion.py",
+    "module_docstring": null,
+    "imports": [
+      "datetime",
+      "fastapi",
+      "starlette.exceptions",
+      "starlette.status",
+      "core.config",
+      "core.jwt",
+      "crud.shortcuts",
+      "crud.user",
+      "db.mongodb",
+      "models.user"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "login",
+        "is_async": true,
+        "args": [
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.post"
+        ],
+        "route_paths": [
+          "/users/login"
+        ]
+      },
+      {
+        "name": "register",
+        "is_async": true,
+        "args": [
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.post"
+        ],
+        "route_paths": [
+          "/users"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "api\\api_v1\\endpoints\\comment.py",
+    "module_docstring": null,
+    "imports": [
+      "fastapi",
+      "starlette.status",
+      "core.jwt",
+      "core.utils",
+      "crud.comment",
+      "crud.shortcuts",
+      "db.mongodb",
+      "models.comment",
+      "models.user"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "create_comment_for_article",
+        "is_async": true,
+        "args": [],
+        "docstring": null,
+        "decorators": [
+          "router.post"
+        ],
+        "route_paths": [
+          "/articles/{slug}/comments"
+        ]
+      },
+      {
+        "name": "get_comment_from_article",
+        "is_async": true,
+        "args": [
+          "slug",
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.get"
+        ],
+        "route_paths": [
+          "/articles/{slug}/comments"
+        ]
+      },
+      {
+        "name": "delete_comment_from_article",
+        "is_async": true,
+        "args": [
+          "slug",
+          "id",
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.delete"
+        ],
+        "route_paths": [
+          "/articles/{slug}/comments/{id}"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "api\\api_v1\\endpoints\\profile.py",
+    "module_docstring": null,
+    "imports": [
+      "typing",
+      "fastapi",
+      "starlette.exceptions",
+      "starlette.status",
+      "core.jwt",
+      "crud.profile",
+      "db.mongodb",
+      "models.profile",
+      "models.user"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "retrieve_profile",
+        "is_async": true,
+        "args": [
+          "username",
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.get"
+        ],
+        "route_paths": [
+          "/profiles/{username}"
+        ]
+      },
+      {
+        "name": "follow_user",
+        "is_async": true,
+        "args": [
+          "username",
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.post"
+        ],
+        "route_paths": [
+          "/profiles/{username}/follow"
+        ]
+      },
+      {
+        "name": "describe_from_user",
+        "is_async": true,
+        "args": [
+          "username",
+          "user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.delete"
+        ],
+        "route_paths": [
+          "/profiles/{username}/follow"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "api\\api_v1\\endpoints\\tag.py",
+    "module_docstring": null,
+    "imports": [
+      "fastapi",
+      "crud.tag",
+      "db.mongodb",
+      "models.tag"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "get_all_tags",
+        "is_async": true,
+        "args": [
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.get"
+        ],
+        "route_paths": [
+          "/tags"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "api\\api_v1\\endpoints\\user.py",
+    "module_docstring": null,
+    "imports": [
+      "fastapi",
+      "core.jwt",
+      "crud.shortcuts",
+      "crud.user",
+      "db.mongodb",
+      "models.user"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "retrieve_current_user",
+        "is_async": true,
+        "args": [
+          "user"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.get"
+        ],
+        "route_paths": [
+          "/user"
+        ]
+      },
+      {
+        "name": "update_current_user",
+        "is_async": true,
+        "args": [
+          "user",
+          "current_user",
+          "db"
+        ],
+        "docstring": null,
+        "decorators": [
+          "router.put"
+        ],
+        "route_paths": [
+          "/user"
+        ]
+      }
+    ]
+  },
+  {
+    "path": "core\\config.py",
+    "module_docstring": null,
+    "imports": [
+      "os",
+      "dotenv",
+      "starlette.datastructures",
+      "databases"
+    ],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "path": "core\\errors.py",
+    "module_docstring": null,
+    "imports": [
+      "collections.abc",
+      "fastapi.openapi.constants",
+      "fastapi.openapi.utils",
+      "starlette.exceptions",
+      "starlette.requests",
+      "starlette.responses",
+      "starlette.status"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "http_error_handler",
+        "is_async": true,
+        "args": [
+          "request",
+          "exc"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "http_422_error_handler",
+        "is_async": true,
+        "args": [
+          "request",
+          "exc"
+        ],
+        "docstring": "Handler for 422 error to transform default pydantic error object to gothinkster format",
+        "decorators": [],
+        "route_paths": []
+      }
+    ]
+  },
+  {
+    "path": "core\\jwt.py",
+    "module_docstring": null,
+    "imports": [
+      "datetime",
+      "typing",
+      "jwt",
+      "fastapi",
+      "jwt",
+      "starlette.exceptions",
+      "starlette.status",
+      "crud.user",
+      "db.mongodb",
+      "models.token",
+      "models.user",
+      "config"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "_get_authorization_token",
+        "is_async": false,
+        "args": [
+          "authorization"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "_get_current_user",
+        "is_async": true,
+        "args": [
+          "db",
+          "token"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "_get_authorization_token_optional",
+        "is_async": false,
+        "args": [
+          "authorization"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "_get_current_user_optional",
+        "is_async": true,
+        "args": [
+          "db",
+          "token"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "get_current_user_authorizer",
+        "is_async": false,
+        "args": [],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "create_access_token",
+        "is_async": false,
+        "args": [],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      }
+    ]
+  },
+  {
+    "path": "core\\security.py",
+    "module_docstring": null,
+    "imports": [
+      "bcrypt",
+      "passlib.context"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "generate_salt",
+        "is_async": false,
+        "args": [],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "verify_password",
+        "is_async": false,
+        "args": [
+          "plain_password",
+          "hashed_password"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "get_password_hash",
+        "is_async": false,
+        "args": [
+          "password"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      }
+    ]
+  },
+  {
+    "path": "core\\utils.py",
+    "module_docstring": null,
+    "imports": [
+      "fastapi.encoders",
+      "pydantic",
+      "starlette.responses"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "create_aliased_response",
+        "is_async": false,
+        "args": [
+          "model"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      }
+    ]
+  },
+  {
+    "path": "crud\\article.py",
+    "module_docstring": null,
+    "imports": [
+      "typing",
+      "bson",
+      "slugify",
+      "datetime",
+      "models.article",
+      "db.mongodb",
+      "core.config",
+      "profile",
+      "tag"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "is_article_favorited_by_user",
+        "is_async": true,
+        "args": [
+          "conn",
+          "slug",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "add_article_to_favorites",
+        "is_async": true,
+        "args": [
+          "conn",
+          "slug",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "remove_article_from_favorites",
+        "is_async": true,
+        "args": [
+          "conn",
+          "slug",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "get_favorites_count_for_article",
+        "is_async": true,
+        "args": [
+          "conn",
+          "slug"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "get_article_by_slug",
+        "is_async": true,
+        "args": [
+          "conn",
+          "slug",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "create_article_by_slug",
+        "is_async": true,
+        "args": [
+          "conn",
+          "article",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "update_article_by_slug",
+        "is_async": true,
+        "args": [
+          "conn",
+          "slug",
+          "article",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "delete_article_by_slug",
+        "is_async": true,
+        "args": [
+          "conn",
+          "slug",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "get_user_articles",
+        "is_async": true,
+        "args": [
+          "conn",
+          "username",
+          "limit",
+          "offset"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "get_articles_with_filters",
+        "is_async": true,
+        "args": [
+          "conn",
+          "filters",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      }
+    ]
+  },
+  {
+    "path": "crud\\comment.py",
+    "module_docstring": null,
+    "imports": [
+      "typing",
+      "models.comment",
+      "db.mongodb",
+      "core.config",
+      "profile"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "get_comments_for_article",
+        "is_async": true,
+        "args": [
+          "conn",
+          "slug",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "create_comment",
+        "is_async": true,
+        "args": [
+          "conn",
+          "slug",
+          "comment",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "delete_comment",
+        "is_async": true,
+        "args": [
+          "conn",
+          "id",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      }
+    ]
+  },
+  {
+    "path": "crud\\profile.py",
+    "module_docstring": null,
+    "imports": [
+      "typing",
+      "starlette.exceptions",
+      "starlette.status",
+      "crud.user",
+      "db.mongodb",
+      "core.config",
+      "models.profile"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "is_following_for_user",
+        "is_async": true,
+        "args": [
+          "conn",
+          "current_username",
+          "target_username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "follow_for_user",
+        "is_async": true,
+        "args": [
+          "conn",
+          "current_username",
+          "target_username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "unfollow_user",
+        "is_async": true,
+        "args": [
+          "conn",
+          "current_username",
+          "target_username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "get_profile_for_user",
+        "is_async": true,
+        "args": [
+          "conn",
+          "target_username",
+          "current_username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      }
+    ]
+  },
+  {
+    "path": "crud\\shortcuts.py",
+    "module_docstring": null,
+    "imports": [
+      "typing",
+      "pydantic",
+      "starlette.exceptions",
+      "starlette.status",
+      "article",
+      "user",
+      "db.mongodb",
+      "models.article"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "check_free_username_and_email",
+        "is_async": true,
+        "args": [
+          "conn",
+          "username",
+          "email"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "get_article_or_404",
+        "is_async": true,
+        "args": [
+          "conn",
+          "slug",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "check_article_for_existence_and_modifying_permissions",
+        "is_async": true,
+        "args": [
+          "conn",
+          "slug",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      }
+    ]
+  },
+  {
+    "path": "crud\\tag.py",
+    "module_docstring": null,
+    "imports": [
+      "typing",
+      "db.mongodb",
+      "models.tag",
+      "core.config"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "fetch_all_tags",
+        "is_async": true,
+        "args": [
+          "conn"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "get_tags_for_article",
+        "is_async": true,
+        "args": [
+          "conn",
+          "slug"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "create_tags_that_not_exist",
+        "is_async": true,
+        "args": [
+          "conn",
+          "tags"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      }
+    ]
+  },
+  {
+    "path": "crud\\user.py",
+    "module_docstring": null,
+    "imports": [
+      "db.mongodb",
+      "pydantic",
+      "bson.objectid",
+      "core.config",
+      "models.user"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "get_user",
+        "is_async": true,
+        "args": [
+          "conn",
+          "username"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "get_user_by_email",
+        "is_async": true,
+        "args": [
+          "conn",
+          "email"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "create_user",
+        "is_async": true,
+        "args": [
+          "conn",
+          "user"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "update_user",
+        "is_async": true,
+        "args": [
+          "conn",
+          "username",
+          "user"
+        ],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      }
+    ]
+  },
+  {
+    "path": "db\\mongodb.py",
+    "module_docstring": null,
+    "imports": [
+      "motor.motor_asyncio"
+    ],
+    "classes": [
+      {
+        "name": "DataBase",
+        "bases": [],
+        "docstring": null,
+        "methods": []
+      }
+    ],
+    "functions": [
+      {
+        "name": "get_database",
+        "is_async": true,
+        "args": [],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      }
+    ]
+  },
+  {
+    "path": "db\\mongodb_utils.py",
+    "module_docstring": null,
+    "imports": [
+      "logging",
+      "motor.motor_asyncio",
+      "core.config",
+      "mongodb"
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "connect_to_mongo",
+        "is_async": true,
+        "args": [],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      },
+      {
+        "name": "close_mongo_connection",
+        "is_async": true,
+        "args": [],
+        "docstring": null,
+        "decorators": [],
+        "route_paths": []
+      }
+    ]
+  },
+  {
+    "path": "models\\article.py",
+    "module_docstring": null,
+    "imports": [
+      "typing",
+      "pydantic",
+      "dbmodel",
+      "profile",
+      "rwmodel"
+    ],
+    "classes": [
+      {
+        "name": "ArticleFilterParams",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "ArticleBase",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "Article",
+        "bases": [
+          "DateTimeModelMixin",
+          "ArticleBase"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "ArticleInDB",
+        "bases": [
+          "DBModelMixin",
+          "Article"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "ArticleInResponse",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "ManyArticlesInResponse",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "ArticleInCreate",
+        "bases": [
+          "ArticleBase"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "ArticleInUpdate",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      }
+    ],
+    "functions": []
+  },
+  {
+    "path": "models\\comment.py",
+    "module_docstring": null,
+    "imports": [
+      "typing",
+      "dbmodel",
+      "profile",
+      "rwmodel"
+    ],
+    "classes": [
+      {
+        "name": "CommentInDB",
+        "bases": [
+          "DBModelMixin",
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "Comment",
+        "bases": [
+          "CommentInDB"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "CommentInCreate",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "CommentInResponse",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "ManyCommentsInResponse",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      }
+    ],
+    "functions": []
+  },
+  {
+    "path": "models\\dbmodel.py",
+    "module_docstring": null,
+    "imports": [
+      "datetime",
+      "typing",
+      "pydantic"
+    ],
+    "classes": [
+      {
+        "name": "DateTimeModelMixin",
+        "bases": [
+          "BaseModel"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "DBModelMixin",
+        "bases": [
+          "DateTimeModelMixin"
+        ],
+        "docstring": null,
+        "methods": []
+      }
+    ],
+    "functions": []
+  },
+  {
+    "path": "models\\profile.py",
+    "module_docstring": null,
+    "imports": [
+      "typing",
+      "pydantic",
+      "rwmodel"
+    ],
+    "classes": [
+      {
+        "name": "Profile",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "ProfileInResponse",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      }
+    ],
+    "functions": []
+  },
+  {
+    "path": "models\\rwmodel.py",
+    "module_docstring": null,
+    "imports": [
+      "datetime",
+      "pydantic"
+    ],
+    "classes": [
+      {
+        "name": "RWModel",
+        "bases": [
+          "BaseModel"
+        ],
+        "docstring": null,
+        "methods": []
+      }
+    ],
+    "functions": []
+  },
+  {
+    "path": "models\\tag.py",
+    "module_docstring": null,
+    "imports": [
+      "typing",
+      "dbmodel",
+      "rwmodel"
+    ],
+    "classes": [
+      {
+        "name": "Tag",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "TagInDB",
+        "bases": [
+          "DBModelMixin",
+          "Tag"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "TagsList",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      }
+    ],
+    "functions": []
+  },
+  {
+    "path": "models\\token.py",
+    "module_docstring": null,
+    "imports": [
+      "rwmodel"
+    ],
+    "classes": [
+      {
+        "name": "TokenPayload",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      }
+    ],
+    "functions": []
+  },
+  {
+    "path": "models\\user.py",
+    "module_docstring": null,
+    "imports": [
+      "typing",
+      "pydantic",
+      "dbmodel",
+      "rwmodel",
+      "core.security"
+    ],
+    "classes": [
+      {
+        "name": "UserBase",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "UserInDB",
+        "bases": [
+          "DBModelMixin",
+          "UserBase"
+        ],
+        "docstring": null,
+        "methods": [
+          {
+            "name": "check_password",
+            "is_async": false,
+            "args": [
+              "self",
+              "password"
+            ],
+            "docstring": null,
+            "decorators": [],
+            "route_paths": []
+          },
+          {
+            "name": "change_password",
+            "is_async": false,
+            "args": [
+              "self",
+              "password"
+            ],
+            "docstring": null,
+            "decorators": [],
+            "route_paths": []
+          }
+        ]
+      },
+      {
+        "name": "User",
+        "bases": [
+          "UserBase"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "UserInResponse",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "UserInLogin",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "UserInCreate",
+        "bases": [
+          "UserInLogin"
+        ],
+        "docstring": null,
+        "methods": []
+      },
+      {
+        "name": "UserInUpdate",
+        "bases": [
+          "RWModel"
+        ],
+        "docstring": null,
+        "methods": []
+      }
+    ],
+    "functions": []
+  }
+]

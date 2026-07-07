@@ -1,0 +1,366 @@
+{
+  "nodes": [
+    {
+      "id": "main",
+      "path": "main.py"
+    },
+    {
+      "id": "api_v1_api",
+      "path": "api\\api_v1\\api.py"
+    },
+    {
+      "id": "endpoints_article",
+      "path": "api\\api_v1\\endpoints\\article.py"
+    },
+    {
+      "id": "endpoints_authenticaion",
+      "path": "api\\api_v1\\endpoints\\authenticaion.py"
+    },
+    {
+      "id": "endpoints_comment",
+      "path": "api\\api_v1\\endpoints\\comment.py"
+    },
+    {
+      "id": "endpoints_profile",
+      "path": "api\\api_v1\\endpoints\\profile.py"
+    },
+    {
+      "id": "endpoints_tag",
+      "path": "api\\api_v1\\endpoints\\tag.py"
+    },
+    {
+      "id": "endpoints_user",
+      "path": "api\\api_v1\\endpoints\\user.py"
+    },
+    {
+      "id": "core_config",
+      "path": "core\\config.py"
+    },
+    {
+      "id": "core_errors",
+      "path": "core\\errors.py"
+    },
+    {
+      "id": "core_jwt",
+      "path": "core\\jwt.py"
+    },
+    {
+      "id": "core_security",
+      "path": "core\\security.py"
+    },
+    {
+      "id": "core_utils",
+      "path": "core\\utils.py"
+    },
+    {
+      "id": "crud_article",
+      "path": "crud\\article.py"
+    },
+    {
+      "id": "crud_comment",
+      "path": "crud\\comment.py"
+    },
+    {
+      "id": "crud_profile",
+      "path": "crud\\profile.py"
+    },
+    {
+      "id": "crud_shortcuts",
+      "path": "crud\\shortcuts.py"
+    },
+    {
+      "id": "crud_tag",
+      "path": "crud\\tag.py"
+    },
+    {
+      "id": "crud_user",
+      "path": "crud\\user.py"
+    },
+    {
+      "id": "db_mongodb",
+      "path": "db\\mongodb.py"
+    },
+    {
+      "id": "db_mongodb_utils",
+      "path": "db\\mongodb_utils.py"
+    },
+    {
+      "id": "models_article",
+      "path": "models\\article.py"
+    },
+    {
+      "id": "models_comment",
+      "path": "models\\comment.py"
+    },
+    {
+      "id": "models_dbmodel",
+      "path": "models\\dbmodel.py"
+    },
+    {
+      "id": "models_profile",
+      "path": "models\\profile.py"
+    },
+    {
+      "id": "models_rwmodel",
+      "path": "models\\rwmodel.py"
+    },
+    {
+      "id": "models_tag",
+      "path": "models\\tag.py"
+    },
+    {
+      "id": "models_token",
+      "path": "models\\token.py"
+    },
+    {
+      "id": "models_user",
+      "path": "models\\user.py"
+    }
+  ],
+  "edges": [
+    {
+      "source": "main",
+      "target": "api_v1_api"
+    },
+    {
+      "source": "main",
+      "target": "core_config"
+    },
+    {
+      "source": "main",
+      "target": "core_errors"
+    },
+    {
+      "source": "main",
+      "target": "db_mongodb_utils"
+    },
+    {
+      "source": "endpoints_article",
+      "target": "core_jwt"
+    },
+    {
+      "source": "endpoints_article",
+      "target": "core_utils"
+    },
+    {
+      "source": "endpoints_article",
+      "target": "crud_article"
+    },
+    {
+      "source": "endpoints_article",
+      "target": "crud_shortcuts"
+    },
+    {
+      "source": "endpoints_article",
+      "target": "db_mongodb"
+    },
+    {
+      "source": "endpoints_article",
+      "target": "models_article"
+    },
+    {
+      "source": "endpoints_article",
+      "target": "models_user"
+    },
+    {
+      "source": "endpoints_authenticaion",
+      "target": "core_config"
+    },
+    {
+      "source": "endpoints_authenticaion",
+      "target": "core_jwt"
+    },
+    {
+      "source": "endpoints_authenticaion",
+      "target": "crud_shortcuts"
+    },
+    {
+      "source": "endpoints_authenticaion",
+      "target": "crud_user"
+    },
+    {
+      "source": "endpoints_authenticaion",
+      "target": "db_mongodb"
+    },
+    {
+      "source": "endpoints_authenticaion",
+      "target": "models_user"
+    },
+    {
+      "source": "endpoints_comment",
+      "target": "core_jwt"
+    },
+    {
+      "source": "endpoints_comment",
+      "target": "core_utils"
+    },
+    {
+      "source": "endpoints_comment",
+      "target": "crud_comment"
+    },
+    {
+      "source": "endpoints_comment",
+      "target": "crud_shortcuts"
+    },
+    {
+      "source": "endpoints_comment",
+      "target": "db_mongodb"
+    },
+    {
+      "source": "endpoints_comment",
+      "target": "models_comment"
+    },
+    {
+      "source": "endpoints_comment",
+      "target": "models_user"
+    },
+    {
+      "source": "endpoints_profile",
+      "target": "core_jwt"
+    },
+    {
+      "source": "endpoints_profile",
+      "target": "crud_profile"
+    },
+    {
+      "source": "endpoints_profile",
+      "target": "db_mongodb"
+    },
+    {
+      "source": "endpoints_profile",
+      "target": "models_profile"
+    },
+    {
+      "source": "endpoints_profile",
+      "target": "models_user"
+    },
+    {
+      "source": "endpoints_tag",
+      "target": "crud_tag"
+    },
+    {
+      "source": "endpoints_tag",
+      "target": "db_mongodb"
+    },
+    {
+      "source": "endpoints_tag",
+      "target": "models_tag"
+    },
+    {
+      "source": "endpoints_user",
+      "target": "core_jwt"
+    },
+    {
+      "source": "endpoints_user",
+      "target": "crud_shortcuts"
+    },
+    {
+      "source": "endpoints_user",
+      "target": "crud_user"
+    },
+    {
+      "source": "endpoints_user",
+      "target": "db_mongodb"
+    },
+    {
+      "source": "endpoints_user",
+      "target": "models_user"
+    },
+    {
+      "source": "core_jwt",
+      "target": "crud_user"
+    },
+    {
+      "source": "core_jwt",
+      "target": "db_mongodb"
+    },
+    {
+      "source": "core_jwt",
+      "target": "models_token"
+    },
+    {
+      "source": "core_jwt",
+      "target": "models_user"
+    },
+    {
+      "source": "crud_article",
+      "target": "models_article"
+    },
+    {
+      "source": "crud_article",
+      "target": "db_mongodb"
+    },
+    {
+      "source": "crud_article",
+      "target": "core_config"
+    },
+    {
+      "source": "crud_comment",
+      "target": "models_comment"
+    },
+    {
+      "source": "crud_comment",
+      "target": "db_mongodb"
+    },
+    {
+      "source": "crud_comment",
+      "target": "core_config"
+    },
+    {
+      "source": "crud_profile",
+      "target": "crud_user"
+    },
+    {
+      "source": "crud_profile",
+      "target": "db_mongodb"
+    },
+    {
+      "source": "crud_profile",
+      "target": "core_config"
+    },
+    {
+      "source": "crud_profile",
+      "target": "models_profile"
+    },
+    {
+      "source": "crud_shortcuts",
+      "target": "db_mongodb"
+    },
+    {
+      "source": "crud_shortcuts",
+      "target": "models_article"
+    },
+    {
+      "source": "crud_tag",
+      "target": "db_mongodb"
+    },
+    {
+      "source": "crud_tag",
+      "target": "models_tag"
+    },
+    {
+      "source": "crud_tag",
+      "target": "core_config"
+    },
+    {
+      "source": "crud_user",
+      "target": "db_mongodb"
+    },
+    {
+      "source": "crud_user",
+      "target": "core_config"
+    },
+    {
+      "source": "crud_user",
+      "target": "models_user"
+    },
+    {
+      "source": "db_mongodb_utils",
+      "target": "core_config"
+    },
+    {
+      "source": "models_user",
+      "target": "core_security"
+    }
+  ]
+}
